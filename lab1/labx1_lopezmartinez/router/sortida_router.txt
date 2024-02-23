@@ -1,0 +1,81 @@
+divendres, 23 de febrer de 2024, 15:41:56 CET
+
+net.ipv4.ip_forward = 1
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0@if7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 12:ae:eb:31:42:74 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.0.2.17/24 brd 10.0.2.255 scope global dynamic eth0
+       valid_lft 85010sec preferred_lft 85010sec
+    inet6 fe80::10ae:ebff:fe31:4274/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1@if8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 1e:3b:a4:a8:ee:85 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 198.18.192.1/20 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::1c3b:a4ff:fea8:ee85/64 scope link 
+       valid_lft forever preferred_lft forever
+
+default via 10.0.2.2 dev eth0 
+10.0.2.0/24 dev eth0 proto kernel scope link src 10.0.2.17 
+198.18.192.0/20 dev eth1 proto kernel scope link src 198.18.192.1 
+
+
+ifquery: unknown interface eth1
+
+PING 10.0.2.2 (10.0.2.2) 56(84) bytes of data.
+64 bytes from 10.0.2.2: icmp_seq=1 ttl=64 time=65.5 ms
+64 bytes from 10.0.2.2: icmp_seq=2 ttl=64 time=0.977 ms
+64 bytes from 10.0.2.2: icmp_seq=3 ttl=64 time=0.572 ms
+
+--- 10.0.2.2 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2025ms
+rtt min/avg/max/mdev = 0.572/22.338/65.466/30.496 ms
+
+PING server (198.18.207.254) 56(84) bytes of data.
+64 bytes from server (198.18.207.254): icmp_seq=1 ttl=64 time=0.193 ms
+64 bytes from server (198.18.207.254): icmp_seq=2 ttl=64 time=0.079 ms
+64 bytes from server (198.18.207.254): icmp_seq=3 ttl=64 time=0.073 ms
+
+--- server ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2079ms
+rtt min/avg/max/mdev = 0.073/0.115/0.193/0.055 ms
+
+PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
+64 bytes from 1.1.1.1: icmp_seq=1 ttl=55 time=16.5 ms
+
+--- 1.1.1.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 16.520/16.520/16.520/0.000 ms
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-02-23 15:42 CET
+Nmap scan report for server (198.18.207.254)
+Host is up (0.000073s latency).
+
+PORT   STATE SERVICE
+22/tcp open  ssh
+MAC Address: B6:A7:BE:8A:33:5F (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.17 seconds
+
+Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    2   168 MASQUERADE  all  --  *      eth0    198.18.192.0/20      0.0.0.0/0           
+
+#PermitRootLogin prohibit-password
+# the setting of "PermitRootLogin without-password".
+PermitRootLogin	yes
