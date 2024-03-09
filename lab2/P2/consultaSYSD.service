@@ -1,0 +1,16 @@
+# Path absolut: /etc/systemd/system/consultaSYSD.service
+# Permissos: 644
+# Propietari: root
+# Grup: root
+
+[Unit]
+Description=consultaSYSD service
+After=multi-user.target
+
+[Service]
+ExecStart=/etc/default/consulta.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=consulta.service

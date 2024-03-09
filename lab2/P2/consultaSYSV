@@ -1,0 +1,63 @@
+#!/bin/sh
+# Start/stop the consulta service.
+#
+# Path absolut: /etc/init.d/consultaSYSV
+# Permissos: 755
+# Propietari: root
+# Grup: root
+
+### BEGIN INIT INFO
+# Provides:          consultaSYSV
+# Required-Start:    $remote_fs $syslog $time
+# Required-Stop:     $remote_fs $syslog $time
+# Should-Start:      $network $named slapd autofs ypbind nscd nslcd winbind sssd
+# Should-Stop:       $network $named slapd autofs ypbind nscd nslcd winbind sssd
+# Default-Start:     5
+# Default-Stop:
+# Short-Description: Regular background program processing daemon
+# Description:       cron is a standard UNIX program that runs user-specified
+#                    programs at periodic scheduled times. vixie cron adds a
+#                    number of features to the basic UNIX cron, including better
+#                    security and more powerful configuration options.
+### END INIT INFO
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+DESC="consultaSYSV service"
+NAME=consultaSYSV
+PIDFILE=/var/run/consultaSYSV.pid
+SCRIPTNAME=/etc/init.d/"$NAME"
+
+. /lib/lsb/init-functions
+
+case "$1" in
+start)
+    log_daemon_msg "Starting consultaSYSV service" "consultaSYSV"
+    /etc/default/consulta.sh
+    log_end_msg $?
+    ;;
+stop)
+    log_daemon_msg "Stopping consultaSYSV service" "consultaSYSV"
+    killproc -p $PIDFILE
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && [ -e "$PIDFILE" ] && rm -f $PIDFILE
+    log_end_msg $RETVAL
+    ;;
+restart)
+    log_daemon_msg "Restarting consultaSYSV service" "consultaSYSV"
+    $0 stop
+    $0 start
+    ;;
+reload|force-reload)
+    log_daemon_msg "Reloading configuration files for consultaSYSV service" "consultaSYSV"
+    # Add any reloading logic here
+    log_end_msg 0
+    ;;
+status)
+    status_of_proc -p $PIDFILE $NAME && exit 0 || exit $?
+    ;;
+*)
+    log_action_msg "Usage: /etc/init.d/consultaSYSV {start|stop|status|restart|reload|force-reload}"
+    exit 2
+    ;;
+esac
+exit 0

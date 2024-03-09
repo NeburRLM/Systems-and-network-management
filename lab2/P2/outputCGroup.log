@@ -1,0 +1,20 @@
+Informació del cgroup de la shell (pid: 90907):
+pid: 90907, ppid:   90906, command: cgroup.sh
+
+Informació del procés pare (pid:   90906):
+pid: 90906, ppid:   90904, command: sudo
+
+Informació del procés pare (pid:   90904):
+pid: 90904, ppid:   46435, command: sudo
+
+Informació del procés pare (pid:   46435):
+pid: 46435, ppid:    2144, command: bash
+
+Informació del procés pare (pid:    2144):
+pid: 2144, ppid:     807, command: gnome-terminal-
+
+Informació del procés pare (pid:     807):
+pid: 807, ppid:       1, command: systemd
+
+Informació del procés pare (pid:       1):
+pid: 1, ppid:       0, command: systemd
