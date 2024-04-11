@@ -1,0 +1,26 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "dmz.gsx" {
+    type master;
+    file "/var/cache/bind/db.dmz.gsx";
+};
+zone "intranet.gsx" {
+    type master;
+    file "/var/cache/bind/db.intranet.gsx";
+};
+zone "18.192.198.in-addr.arpa" {
+    type master;
+    file "/var/cache/bind/db.198";
+    notify no;
+};
+zone "24.172.in-addr.arpa" {
+    type master;
+    file "/var/cache/bind/db.172";
+    notify no;
+};

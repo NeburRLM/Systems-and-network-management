@@ -1,0 +1,126 @@
+  TIME: 2024-04-03 10:25:58.946
+    IP: 0.0.0.0 (72:36:15:9c:33:3e) > 255.255.255.255 (ff:ff:ff:ff:ff:ff)
+    OP: 1 (BOOTPREQUEST)
+ HTYPE: 1 (Ethernet)
+  HLEN: 6
+  HOPS: 0
+   XID: e09dd634
+  SECS: 0
+ FLAGS: 0
+CIADDR: 0.0.0.0
+YIADDR: 0.0.0.0
+SIADDR: 0.0.0.0
+GIADDR: 0.0.0.0
+CHADDR: 72:36:15:9c:33:3e:00:00:00:00:00:00:00:00:00:00
+ SNAME: .
+ FNAME: .
+OPTION:  53 (  1) DHCP message type         1 (DHCPDISCOVER)
+OPTION:  50 (  4) Request IP address        172.24.192.6
+OPTION:  12 (  7) Host name                 client1
+OPTION:  55 (  8) Parameter Request List      1 (Subnet mask)
+					     28 (Broadcast address)
+					      2 (Time offset)
+					      3 (Routers)
+					     15 (Domainname)
+					      6 (DNS server)
+					    119 (Domain Search)
+					     12 (Host name)
+					    
+OPTION:  61 ( 19) Client-identifier         ff:15:9c:33:3e:00:01:00:01:2d:89:ed:5c:f2:86:ac:6f:6f:25
+---------------------------------------------------------------------------
+
+  TIME: 2024-04-03 10:26:02.181
+    IP: 0.0.0.0 (fa:40:c9:e7:eb:10) > 255.255.255.255 (ff:ff:ff:ff:ff:ff)
+    OP: 1 (BOOTPREQUEST)
+ HTYPE: 1 (Ethernet)
+  HLEN: 6
+  HOPS: 0
+   XID: 19395150
+  SECS: 0
+ FLAGS: 0
+CIADDR: 0.0.0.0
+YIADDR: 0.0.0.0
+SIADDR: 0.0.0.0
+GIADDR: 0.0.0.0
+CHADDR: fa:40:c9:e7:eb:10:00:00:00:00:00:00:00:00:00:00
+ SNAME: .
+ FNAME: .
+OPTION:  53 (  1) DHCP message type         1 (DHCPDISCOVER)
+OPTION:  50 (  4) Request IP address        172.24.192.5
+OPTION:  12 (  7) Host name                 client2
+OPTION:  55 (  8) Parameter Request List      1 (Subnet mask)
+					     28 (Broadcast address)
+					      2 (Time offset)
+					      3 (Routers)
+					     15 (Domainname)
+					      6 (DNS server)
+					    119 (Domain Search)
+					     12 (Host name)
+					    
+OPTION:  61 ( 19) Client-identifier         ff:c9:e7:eb:10:00:01:00:01:2d:89:ed:58:c6:52:4c:07:06:8f
+---------------------------------------------------------------------------
+
+  TIME: 2024-04-03 10:26:03.973
+    IP: 0.0.0.0 (72:36:15:9c:33:3e) > 255.255.255.255 (ff:ff:ff:ff:ff:ff)
+    OP: 1 (BOOTPREQUEST)
+ HTYPE: 1 (Ethernet)
+  HLEN: 6
+  HOPS: 0
+   XID: e09dd634
+  SECS: 0
+ FLAGS: 0
+CIADDR: 0.0.0.0
+YIADDR: 0.0.0.0
+SIADDR: 0.0.0.0
+GIADDR: 0.0.0.0
+CHADDR: 72:36:15:9c:33:3e:00:00:00:00:00:00:00:00:00:00
+ SNAME: .
+ FNAME: .
+OPTION:  53 (  1) DHCP message type         3 (DHCPREQUEST)
+OPTION:  54 (  4) Server identifier         172.24.255.254
+OPTION:  50 (  4) Request IP address        172.24.192.6
+OPTION:  12 (  7) Host name                 client1
+OPTION:  55 (  8) Parameter Request List      1 (Subnet mask)
+					     28 (Broadcast address)
+					      2 (Time offset)
+					      3 (Routers)
+					     15 (Domainname)
+					      6 (DNS server)
+					    119 (Domain Search)
+					     12 (Host name)
+					    
+OPTION:  61 ( 19) Client-identifier         ff:15:9c:33:3e:00:01:00:01:2d:89:ed:5c:f2:86:ac:6f:6f:25
+---------------------------------------------------------------------------
+
+  TIME: 2024-04-03 10:26:07.209
+    IP: 0.0.0.0 (fa:40:c9:e7:eb:10) > 255.255.255.255 (ff:ff:ff:ff:ff:ff)
+    OP: 1 (BOOTPREQUEST)
+ HTYPE: 1 (Ethernet)
+  HLEN: 6
+  HOPS: 0
+   XID: 19395150
+  SECS: 0
+ FLAGS: 0
+CIADDR: 0.0.0.0
+YIADDR: 0.0.0.0
+SIADDR: 0.0.0.0
+GIADDR: 0.0.0.0
+CHADDR: fa:40:c9:e7:eb:10:00:00:00:00:00:00:00:00:00:00
+ SNAME: .
+ FNAME: .
+OPTION:  53 (  1) DHCP message type         3 (DHCPREQUEST)
+OPTION:  54 (  4) Server identifier         172.24.255.254
+OPTION:  50 (  4) Request IP address        172.24.192.5
+OPTION:  12 (  7) Host name                 client2
+OPTION:  55 (  8) Parameter Request List      1 (Subnet mask)
+					     28 (Broadcast address)
+					      2 (Time offset)
+					      3 (Routers)
+					     15 (Domainname)
+					      6 (DNS server)
+					    119 (Domain Search)
+					     12 (Host name)
+					    
+OPTION:  61 ( 19) Client-identifier         ff:c9:e7:eb:10:00:01:00:01:2d:89:ed:58:c6:52:4c:07:06:8f
+---------------------------------------------------------------------------
+
