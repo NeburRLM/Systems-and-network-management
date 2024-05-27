@@ -1,0 +1,31 @@
+#! /bin/bash
+
+# Comprovem que l'usuari posi parametres
+if [[ $# -eq 0 ]] ; then
+	echo "No s'ha introduït cap document a imprimir"
+	exit 1
+fi
+
+# Comprovar paraula clau
+function comprovar_clau {
+  	local paraula_clau="sisplau"
+	local error=0
+    	stty -echo
+    	read -p "Introdueix la paraula clau: " valor
+    	stty echo
+    	echo
+
+    	if [ "$valor" = "$paraula_clau" ]; then
+      		error=0
+    	else
+    		error=1
+	fi
+	return $error
+}
+
+if comprovar_clau; then
+    echo "Imprimint document ..."
+    /usr/bin/lp "$@"
+else
+    echo "ERROR: La paraula clau no és correcta."
+fi

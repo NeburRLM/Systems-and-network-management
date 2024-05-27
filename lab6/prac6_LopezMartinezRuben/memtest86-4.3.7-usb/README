@@ -1,0 +1,13 @@
+Instructions for creating a bootable MemTest86 USB drive.
+=========================================================
+
+1) Insert a USB drive into a USB slot.
+2) Determine which device the USB drive is assigned as (eg. /dev/sdc [Linux] or /dev/disk2 [Mac]).
+3) As root type: dd if=memtest86-<ver>.usb.img of=<dev>
+
+where dev is the device the key is assigned to. Use the base device (eg. /dev/sdc [Linux] or /dev/disk2 [Mac]) 
+not a partition designation (eg. /dev/sdc1 or /dev/disk2s1).
+
+Warning: all data on the USB key will be lost. 
+Warning Warning: Make sure that the device used in the dd command above
+is correct!!!
