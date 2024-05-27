@@ -1,0 +1,118 @@
+### Iniciant proves en R2 ###
+
+# Comprovant que els daemons s'estan executant en R2...
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                81988               81969               0                   18:58               pts/0               00:00:00            /bin/bash
+snort               83024               81988               0                   18:58               ?                   00:00:00            /usr/sbin/zebra -d -A 127.0.0.1 -f /etc/quagga/zebra.conf
+snort               83047               81988               0                   18:58               ?                   00:00:00            /usr/sbin/ripd -d -A 127.0.0.1 -f /etc/quagga/ripd.conf
+
+# Comprovant la taula d'enrutament de R2...
+default via [35m10.192.1.1 [0mdev [36mlink1_veth2 [0mproto zebra metric 20 
+[35m10.192.1.0/30 [0mdev [36mlink1_veth2 [0mproto kernel scope link src [35m10.192.1.2 [0m
+[35m10.192.2.0/30 [0mdev [36mlink2_veth1 [0mproto kernel scope link src [35m10.192.2.1 [0m
+[35m10.192.3.0/30 [0mvia [35m10.192.2.2 [0mdev [36mlink2_veth1 [0mproto zebra metric 20 
+[35m10.192.4.0/30 [0mvia [35m10.192.1.1 [0mdev [36mlink1_veth2 [0mproto zebra metric 20 
+
+# Comprovant configuració i taula d'enrutament en vtysh de R2...
+Building configuration...
+
+Current configuration:
+!
+!
+interface link1_veth2
+!
+interface link2_veth1
+!
+interface lo
+!
+router rip
+ version 2
+ network 10.192.1.2/30
+ network 10.192.2.1/30
+!
+ip forwarding
+!
+line vty
+!
+end
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, P - PIM, A - Babel, N - NHRP,
+       > - selected route, * - FIB route
+
+R>* 0.0.0.0/0 [120/2] via 10.192.1.1, link1_veth2, 00:00:19
+C>* 10.192.1.0/30 is directly connected, link1_veth2
+C>* 10.192.2.0/30 is directly connected, link2_veth1
+R>* 10.192.3.0/30 [120/2] via 10.192.2.2, link2_veth1, 00:00:14
+R>* 10.192.4.0/30 [120/2] via 10.192.1.1, link1_veth2, 00:00:19
+C>* 127.0.0.0/8 is directly connected, lo
+Routing Protocol is "rip"
+  Sending updates every 30 seconds with +/-50%, next due in 18 seconds
+  Timeout after 180 seconds, garbage collect after 120 seconds
+  Outgoing update filter list for all interface is not set
+  Incoming update filter list for all interface is not set
+  Default redistribution metric is 1
+  Redistributing:
+  Default version control: send version 2, receive version 2 
+    Interface        Send  Recv   Key-chain
+    link1_veth2      2     2      
+    link2_veth1      2     2      
+  Routing for Networks:
+    10.192.1.2/30
+    10.192.2.1/30
+  Routing Information Sources:
+    Gateway          BadPackets BadRoutes  Distance Last Update
+    10.192.1.1               0         0       120   00:00:09
+    10.192.2.2               0         0       120   00:00:09
+  Distance: (default is 120)
+
+Comprovant les IPs i rutes de R2...\n
+1: [36mlo: [0m<LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback [33m00:00:00:00:00:00[0m brd [33m00:00:00:00:00:00[0m
+    inet [35m127.0.0.1[0m/8 scope host lo
+       valid_lft forever preferred_lft forever
+297: [36mlink1_veth2@if298: [0m<BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state [32mUP [0mgroup default qlen 1000
+    link/ether [33m86:70:28:0f:68:30[0m brd [33mff:ff:ff:ff:ff:ff[0m link-netnsid 0
+    inet [35m10.192.1.2[0m/30 scope global link1_veth2
+       valid_lft forever preferred_lft forever
+300: [36mlink2_veth1@if299: [0m<BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state [32mUP [0mgroup default qlen 1000
+    link/ether [33m72:cc:b3:e1:35:cc[0m brd [33mff:ff:ff:ff:ff:ff[0m link-netnsid 2
+    inet [35m10.192.2.1[0m/30 scope global link2_veth1
+       valid_lft forever preferred_lft forever
+
+# Realitzant ping i traceroute desde R1 a R2 (10.192.2.1)...
+PING 10.192.2.1 (10.192.2.1) 56(84) bytes of data.
+64 bytes from 10.192.2.1: icmp_seq=1 ttl=64 time=0.050 ms
+
+--- 10.192.2.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.050/0.050/0.050/0.000 ms
+traceroute to 10.192.2.1 (10.192.2.1), 30 hops max, 60 byte packets
+ 1  10.192.2.1  0.055 ms  0.008 ms  0.007 ms
+
+# Realitzant traceroute desde R2 (10.192.2.1)...
+traceroute to 10.192.2.1 (10.192.2.1), 30 hops max, 60 byte packets
+ 1  10.192.2.1  0.048 ms  0.006 ms  0.005 ms
+
+# Forçant la caiguda de l'enllaç link1_veth2 en R2...
+
+# Verificant la ruta en R1 cap a 10.192.2.1 després de la caiguda de l'enllaç...
+10.192.2.1 via 10.192.4.1 dev link4_veth2 src 10.192.4.2 uid 0 
+    cache 
+
+# Realizant traceroute desde R1 a 10.192.2.1 després de la caiguda de l'enllaç...
+traceroute to 10.192.2.1 (10.192.2.1), 30 hops max, 60 byte packets
+ 1  10.192.4.1  0.039 ms  0.008 ms  0.007 ms
+ 2  10.192.3.1  0.015 ms  0.008 ms  0.009 ms
+ 3  10.192.2.1  0.043 ms  0.017 ms  0.014 ms
+
+# Axecant novament l'enllaç link1_veth2 en R2...
+
+# Verificant la ruta en R1 cap a 10.192.2.1 després d'axecar l'enllaç...
+10.192.2.1 via 10.192.1.2 dev link1_veth1 src 10.192.1.1 uid 0 
+    cache 
+
+# Realizant traceroute desde R1 a 10.192.2.1 després d'axecar l'enllaç...
+traceroute to 10.192.2.1 (10.192.2.1), 30 hops max, 60 byte packets
+ 1  10.192.2.1  0.069 ms  0.009 ms  0.022 ms
+
+### Proves completades.
